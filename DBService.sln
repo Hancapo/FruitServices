@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DBService", "DBService\", "{1A93D3B5-10B4-4AC1-9BBF-C6B7A4652F2F}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_51112"
+		Debug.AspNetCompiler.PhysicalPath = "DBService\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51112\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_51112"
+		Release.AspNetCompiler.PhysicalPath = "DBService\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_51112\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "51112"
+		SlnRelativePath = "DBService\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A93D3B5-10B4-4AC1-9BBF-C6B7A4652F2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A93D3B5-10B4-4AC1-9BBF-C6B7A4652F2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {413DC873-0908-4EBA-8773-EF50A9B71D9B}
+	EndGlobalSection
+EndGlobal
