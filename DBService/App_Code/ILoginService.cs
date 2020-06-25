@@ -22,7 +22,7 @@ public interface IService
 	string TraerDato(string dato, string tipo, string valor, string tabla);
 
 	[OperationContract]
-	bool ExisteInstancia(string referencia, string tabla, string tipo);
+	bool ComprobarDato(string referencia, string tabla, string tipo);
 
 	[OperationContract]
 	bool AgregarProducto(string nombre, string unidad, int stock, int precio);

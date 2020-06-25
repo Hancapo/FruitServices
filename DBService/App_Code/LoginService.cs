@@ -13,12 +13,12 @@ using System.Management.Instrumentation;
 
 public class Service : IService
 {
-	readonly SqlConnection sc = new SqlConnection(@"Data Source=(localdb)\servertest;Initial Catalog=Fruteria;Integrated Security=true;");
+	readonly SqlConnection sc = new SqlConnection(@"Data Source=(localdb)\servertest;Initial Catalog=Tienda;Integrated Security=true;");
 
 	public bool VerificarAcceso(string nombreusuario, string pass)
 	{
 		sc.Open();
-		SqlCommand sqc = new SqlCommand("SELECT * FROM dbo.Usuario WHERE nom_usuario = '" + nombreusuario + "' AND password = '" + pass + "';", sc);
+		SqlCommand sqc = new SqlCommand("SELECT * FROM dbo.Usuario WHERE nom_user = '" + nombreusuario + "' AND password = '" + pass + "';", sc);
 		sqc.ExecuteNonQuery();
 		DataTable dt = new DataTable();
 		SqlDataAdapter sqa = new SqlDataAdapter(sqc);
@@ -26,8 +26,11 @@ public class Service : IService
 
 		if (dt.Rows.Count <= 0)
 		{
+			sc.Close();
+
 			return false;
 		}
+		sc.Close();
 
 		return true;
 	}
@@ -35,7 +38,7 @@ public class Service : IService
 	public bool CrearUsuario(string email, string pass, string user)
 	{
 		sc.Open();
-		if (!ExisteInstancia(email, "dbo.Usuario", "email"))
+		if (!ComprobarDato(email, "dbo.Usuario", "email"))
 		{
 			SqlCommand ComandoUsuario = new SqlCommand("INSERT INTO dbo.Usuario (email, password, fecha, nom_usuario) values ('" + email + "', '" + pass + "', GETDATE(), '" + user + "');", sc);
 			ComandoUsuario.ExecuteNonQuery();
@@ -46,6 +49,8 @@ public class Service : IService
 		}
 		else
 		{
+			sc.Close();
+
 			return false;
 		}
 
@@ -62,9 +67,9 @@ public class Service : IService
 		return datos;
 	}
 
-	public bool ExisteInstancia(string referencia, string tabla, string tipo)
+	public bool ComprobarDato(string referencia, string tabla, string tipo)
 	{
-
+		sc.Open();
 		SqlCommand command = new SqlCommand("Select id from " + tabla + " WHERE " + tipo + "='" + referencia + "'", sc);
 		List<int> results = new List<int>();
 		using (SqlDataReader reader = command.ExecuteReader())
@@ -91,16 +96,18 @@ public class Service : IService
 
 	public bool AgregarProducto(string nombre, string unidad, int stock, int precio)
 	{
-		sc.Open();
-		if (!ExisteInstancia(nombre, "dbo.Producto", "nom_prod"))
+
+		if (!ComprobarDato(nombre, "dbo.Productos", "nom_prod"))
 		{
-			SqlCommand comando = new SqlCommand("insert into dbo.Producto (nom_prod, Unidad, Stock, Precio) values ('" + nombre + "', '" + unidad + "', " + stock + ", " + precio + ");", sc);
+
+			SqlCommand comando = new SqlCommand("insert into dbo.Productos (nom_prod, unidad, stock, Precio) values ('" + nombre + "', '" + unidad + "', " + stock + ", " + precio + ");", sc);
+
 			comando.ExecuteNonQuery();
-			sc.Close();
 			return true;
 		}
 		else
 		{
+
 			return false;
 		}
 
