@@ -13,7 +13,10 @@ using System.Management.Instrumentation;
 
 public class Service : IService
 {
-	readonly SqlConnection sc = new SqlConnection(@"Data Source=(localdb)\tiendaduoc;Initial Catalog=Tienda;Integrated Security=true;");
+
+	
+
+	readonly SqlConnection sc = new SqlConnection(@"Data Source=(Localdb)\tiendaduoc;Initial Catalog=Tienda;Integrated Security=true;");
 
 	public bool VerificarAcceso(string nombreusuario, string pass)
 	{
@@ -37,7 +40,6 @@ public class Service : IService
 
 	public bool CrearUsuario(string email, string pass, string user, string TipoU, string run)
 	{
-		sc.Open();
 		if (!ComprobarDato(email, "dbo.Usuario", "email"))
 		{
 			SqlCommand ComandoUsuario = new SqlCommand("INSERT INTO dbo.Usuario (email, nom_user, password, run, TipoUsuario) VALUES ('" + email + "', '" + user + "', '" + pass + "', '" + run + "', 'user');", sc);
@@ -112,5 +114,16 @@ public class Service : IService
 		}
 
 	}
+
+	public bool ActualizarDatoProductos(string nombre, int precio, int stock, string unidad, int id)
+    {
+		sc.Open();
+			SqlCommand sss = new SqlCommand("UPDATE dbo.Productos SET nom_prod = '" + nombre + "', precio = " + precio + ", stock = " + stock + ", unidad = '" + unidad + "' WHERE id = " + id, sc);
+			sss.ExecuteNonQuery();
+			return true;
+
+
+
+    }
 		
 }

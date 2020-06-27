@@ -27,5 +27,8 @@ public interface IService
 	[OperationContract]
 	bool AgregarProducto(string nombre, string unidad, int stock, int precio);
 
+	[OperationContract]
+	bool ActualizarDatoProductos(string nombre, int precio, int stock, string unidad, int id);
+
 }
 
