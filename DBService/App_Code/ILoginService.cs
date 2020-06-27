@@ -16,7 +16,7 @@ public interface IService
 	bool VerificarAcceso(string nombreusuario, string pass);
 
 	[OperationContract]
-	bool CrearUsuario(string email, string pass, string user);
+	bool CrearUsuario(string email, string pass, string user, string TipoU, string run);
 
 	[OperationContract]
 	string TraerDato(string dato, string tipo, string valor, string tabla);
