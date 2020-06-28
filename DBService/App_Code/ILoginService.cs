@@ -30,5 +30,8 @@ public interface IService
 	[OperationContract]
 	bool ActualizarDatoProductos(string nombre, int precio, int stock, string unidad, int id);
 
+	[OperationContract]
+	bool AgregarDomicio(string calle, string ciudad, string comuna, int cp, int iduser, int numerodomi, string pais);
+
 }
 

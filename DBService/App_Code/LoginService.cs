@@ -38,6 +38,15 @@ public class Service : IService
 		return true;
 	}
 
+	public bool AgregarDomicio(string calle, string ciudad, string comuna, int cp, int iduser, int numerodomi, string pais)
+    {
+		sc.Open();
+		SqlCommand scf = new SqlCommand("INSERT INTO dbo.direccion(Calle,Ciudad,Comuna,cp,idUsuario,N_domic,Pais) VALUES ('Avenida Siempre Viva', 'Santiago', 'Puente Alto', 7845, 2, 1182, 'Chile');", sc);
+		scf.ExecuteNonQuery();
+		sc.Close();
+		return true;
+    }
+
 	public bool CrearUsuario(string email, string pass, string user, string TipoU, string run)
 	{
 		if (!ComprobarDato(email, "dbo.Usuario", "email"))
