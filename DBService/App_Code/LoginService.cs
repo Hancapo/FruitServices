@@ -38,10 +38,10 @@ public class Service : IService
 		return true;
 	}
 
-	public bool AgregarDomicio(string calle, string ciudad, string comuna, int cp, int iduser, int numerodomi, string pais)
+	public bool AgregarDomicilio(string calle, string ciudad, string comuna, int cp, int iduser, int numerodomi, string pais)
     {
 		sc.Open();
-		SqlCommand scf = new SqlCommand("INSERT INTO dbo.direccion(Calle,Ciudad,Comuna,cp,idUsuario,N_domic,Pais) VALUES ('Avenida Siempre Viva', 'Santiago', 'Puente Alto', 7845, 2, 1182, 'Chile');", sc);
+		SqlCommand scf = new SqlCommand("INSERT INTO dbo.direccion(Calle,Ciudad,Comuna,cp,idUsuario,N_domic,Pais) VALUES ('" + calle + "', '" + ciudad + "', '" + comuna + "', " + cp + ", " + iduser + ", " + numerodomi + ", '" + pais +"');", sc);
 		scf.ExecuteNonQuery();
 		sc.Close();
 		return true;
