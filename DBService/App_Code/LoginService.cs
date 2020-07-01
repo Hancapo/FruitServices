@@ -41,17 +41,17 @@ public class Service : IService
 	public bool AgregarDomicilio(string calle, string ciudad, string comuna, int cp, int iduser, int numerodomi, string pais)
     {
 		sc.Open();
-		SqlCommand scf = new SqlCommand("INSERT INTO dbo.direccion(Calle,Ciudad,Comuna,cp,idUsuario,N_domic,Pais) VALUES ('" + calle + "', '" + ciudad + "', '" + comuna + "', " + cp + ", " + iduser + ", " + numerodomi + ", '" + pais +"');", sc);
+		SqlCommand scf = new SqlCommand("INSERT INTO dbo.direccion(Calle,Ciudad,Comuna,cp,IdUsuario,N_domic,Pais) VALUES ('" + calle + "', '" + ciudad + "', '" + comuna + "', " + cp + ", " + iduser + ", " + numerodomi + ", '" + pais +"');", sc);
 		scf.ExecuteNonQuery();
 		sc.Close();
 		return true;
     }
 
-	public bool CrearUsuario(string email, string pass, string user, string TipoU, string run)
+	public bool CrearUsuario(string email, string pass, string user, string TipoU, string run, string telefono)
 	{
 		if (!ComprobarDato(email, "dbo.Usuario", "email"))
 		{
-			SqlCommand ComandoUsuario = new SqlCommand("INSERT INTO dbo.Usuario (email, nom_user, password, run, TipoUsuario) VALUES ('" + email + "', '" + user + "', '" + pass + "', '" + run + "', 'user');", sc);
+			SqlCommand ComandoUsuario = new SqlCommand("INSERT INTO dbo.Usuario (email, nom_user, password, run, TipoUsu, telefono) VALUES ('" + email + "', '" + user + "', '" + pass + "', '" + run + "', 'user', '" + telefono + "');", sc);
 			ComandoUsuario.ExecuteNonQuery();
 
 			sc.Close();
@@ -134,5 +134,40 @@ public class Service : IService
 
 
     }
-		
+	
+	public bool BorrarPorId(int id, string tabla)
+    {
+		sc.Open();
+		SqlCommand ppp = new SqlCommand("DELETE FROM " + tabla + " WHERE id = " + id, sc);
+		ppp.ExecuteNonQuery();
+		sc.Close();
+		return true;
+    }
+
+	public int TraerIdDomicilio(string calle, int numerodom, int cp)
+	{
+		sc.Open();
+		SqlCommand xxc = new SqlCommand("SELECT id FROM dbo.direccion WHERE Calle = '" + calle + "' AND N_domic = " + numerodom + " AND cp = " + cp, sc);
+		int iddom = Convert.ToInt32(xxc.ExecuteScalar());
+		sc.Close();
+		return iddom;
+    }
+
+    public bool AgregarDetalleCompra(int cantidad, int total, int iddireccion, int idusuario, int metodopago)
+    {
+		sc.Open();
+		SqlCommand hfg = new SqlCommand("INSERT INTO dbo.Detalle_compra(idProducto, cantidad, total, idDireccion, idMetp, idUsuario) VALUES (2, " + cantidad + ", " + total + ", " + iddireccion + ", " + metodopago + ", " + idusuario + ");", sc);
+		hfg.ExecuteNonQuery();
+		sc.Close();
+		return true;
+    }
+
+	public bool ActualizarStock(int cantidad, string nombreprod)
+    {
+		sc.Open();
+		SqlCommand erf = new SqlCommand("UPDATE dbo.Productos SET stock = stock - " + cantidad + " WHERE nom_prod = '" + nombreprod +"'", sc);
+		erf.ExecuteNonQuery();
+		sc.Close();
+		return true;
+    }
 }

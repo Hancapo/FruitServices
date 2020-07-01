@@ -16,7 +16,7 @@ public interface IService
 	bool VerificarAcceso(string nombreusuario, string pass);
 
 	[OperationContract]
-	bool CrearUsuario(string email, string pass, string user, string TipoU, string run);
+	bool CrearUsuario(string email, string pass, string user, string TipoU, string run, string telefono);
 
 	[OperationContract]
 	string TraerDato(string dato, string tipo, string valor, string tabla);
@@ -32,6 +32,18 @@ public interface IService
 
 	[OperationContract]
 	bool AgregarDomicilio(string calle, string ciudad, string comuna, int cp, int iduser, int numerodomi, string pais);
+
+	[OperationContract]
+	bool BorrarPorId(int id, string tabla);
+
+	[OperationContract]
+	int TraerIdDomicilio(string calle, int numerodom, int cp);
+
+	[OperationContract]3
+	bool AgregarDetalleCompra(int cantidad, int total, int iddireccion, int idusuario, int metodopago);
+
+	[OperationContract]
+	bool ActualizarStock(int cantidad, string nombreprod);
 
 }
 
